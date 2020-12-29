@@ -10,4 +10,6 @@
     <string name="radiobuttontext3">Pertenece a Whatsapp</string>
     <string name="radiobuttontext4">Pertenece a Instagram</string>
     <string name="logo_de_whatsapp">Logo de whatsapp</string>
+    <string name="mensajeloser">Intente nuevamente</string>
+
 </resources>

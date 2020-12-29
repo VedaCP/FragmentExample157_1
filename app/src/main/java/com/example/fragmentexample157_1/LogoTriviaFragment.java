@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +27,10 @@ public class LogoTriviaFragment extends Fragment {
     public LogoTriviaFragment() {
         // Required empty public constructor
     }
-
+    public static LogoTriviaFragment newInstance2() {
+        LogoTriviaFragment fragment = new LogoTriviaFragment();
+        return fragment;
+    }
 
     public static LogoTriviaFragment newInstance(String mName) {
         LogoTriviaFragment fragment = new LogoTriviaFragment();
@@ -90,8 +95,10 @@ public class LogoTriviaFragment extends Fragment {
             public void onClick(View v) {
                 if ( choice == 2){
                     //TODO poner el metodo de fragmento ganador
+                    addWinnerFragment(name);
                 } else {
-                    //TODO poner el metodo de fragmento perdedor.
+                    addLoserFragment(name);
+
                 }
             }
         });
@@ -99,11 +106,27 @@ public class LogoTriviaFragment extends Fragment {
     }
 
     //Todo crear metodo para ir al fragmento ganador
-
+    private void addWinnerFragment(String name){
+        WinnerFragment winnerFragment = WinnerFragment.newInstance(name);
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
+                .replace(R.id.content_fragment, winnerFragment,
+                        LogoTriviaFragment.class.getSimpleName())
+                .addToBackStack(null);
+        fragmentTransaction.commit();
+    }
 
 
     //Todo crear el metodo para ir al fragmento perdedor.
-
+    private void addLoserFragment(String name){
+        LoserFragment loserFragment = LoserFragment.newInstance(name);
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
+                .replace(R.id.content_fragment, loserFragment,
+                        LogoTriviaFragment.class.getSimpleName())
+                .addToBackStack(null);
+        fragmentTransaction.commit();
+    }
 
     //TODO no olvidar pasar como argumento el nombre del jugador.
 
