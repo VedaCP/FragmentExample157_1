@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,20 +52,16 @@ public class WinnerFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
                 super.onViewCreated(view, savedInstanceState);
+        String greeting = getString(R.string.mensajewinner, name);
+        binding.textView.setText(greeting);
         binding.buttonWinner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addLogoTriviaFragment();
+                Navigation.findNavController(v).navigate(R.id.
+                        action_winnerFragment_to_titleFragment);
             }
         });
     }
-    private void addLogoTriviaFragment() {
-        LogoTriviaFragment logoTriviaFragment = LogoTriviaFragment.newInstance2();
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
-                .replace(R.id.content_fragment, logoTriviaFragment,
-                        LogoTriviaFragment.class.getSimpleName());
-        fragmentTransaction.commit();
-    }
+
 
 }

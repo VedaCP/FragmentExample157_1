@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,9 +49,14 @@ public class TitleFragment extends Fragment {
         binding.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!binding.etPerson.getText().toString().isEmpty()){
-                    addLogoTriviaFragment(binding.etPerson.getText().toString());
-                } else {
+                Bundle bundle = new Bundle();
+                String name = binding.etPerson.getText().toString();
+                bundle.putString("param1", name);
+                if (!name.isEmpty()){
+                    Navigation.findNavController(v).navigate(R.id.
+                            action_titleFragment_to_logoTriviaFragment, bundle);
+
+                 } else {
                     Toast.makeText(getContext(), "Debes escribir un mensaje",
                             Toast.LENGTH_SHORT).show();
                 }
@@ -59,14 +65,6 @@ public class TitleFragment extends Fragment {
         });
     }
 
-    private void addLogoTriviaFragment(String name){
-        LogoTriviaFragment logoTriviaFragment = LogoTriviaFragment.newInstance(name);
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
-                .replace(R.id.content_fragment, logoTriviaFragment,
-                        LogoTriviaFragment.class.getSimpleName())
-                .addToBackStack(null);
-        fragmentTransaction.commit();
-    }
+
 
 }

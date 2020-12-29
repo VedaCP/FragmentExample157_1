@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 
 import android.renderscript.ScriptGroup;
 import android.view.LayoutInflater;
@@ -36,31 +37,17 @@ public class LoserFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        String greeting = getString(R.string.mensajeloser, name);
+        binding.tvMessageLoser.setText(greeting);
         binding.btLoser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addLogoTriviaFragment();
+                Navigation.findNavController(v).navigate(R.id.
+                        action_loserFragment_to_logoTriviaFragment);
             }
         });
     }
 
-
-
-    private void addLogoTriviaFragment() {
-        LogoTriviaFragment logoTriviaFragment = LogoTriviaFragment.newInstance2();
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
-                .replace(R.id.content_fragment, logoTriviaFragment,
-                        LogoTriviaFragment.class.getSimpleName());
-        fragmentTransaction.commit();
-    }
-    public static LoserFragment newInstance(String mName) {
-        LoserFragment fragment = new LoserFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, mName);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

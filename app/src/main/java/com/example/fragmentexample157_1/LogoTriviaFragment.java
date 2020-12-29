@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,10 +28,7 @@ public class LogoTriviaFragment extends Fragment {
     public LogoTriviaFragment() {
         // Required empty public constructor
     }
-    public static LogoTriviaFragment newInstance2() {
-        LogoTriviaFragment fragment = new LogoTriviaFragment();
-        return fragment;
-    }
+
 
     public static LogoTriviaFragment newInstance(String mName) {
         LogoTriviaFragment fragment = new LogoTriviaFragment();
@@ -60,6 +58,10 @@ public class LogoTriviaFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         String greeting = getString(R.string.greeting, name);
         binding.tvName.setText(greeting);
+        Bundle bundle = new Bundle();
+        Bundle bundle1 = new Bundle();
+        bundle.putString("param1", name);
+        bundle1.putString("param1", name);
 
         binding.radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -94,41 +96,16 @@ public class LogoTriviaFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if ( choice == 2){
-                    //TODO poner el metodo de fragmento ganador
-                    addWinnerFragment(name);
+                    Navigation.findNavController(v).navigate(R.id.
+                            action_logoTriviaFragment_to_winnerFragment, bundle);
                 } else {
-                    addLoserFragment(name);
+                    Navigation.findNavController(v).navigate(R.id.
+                            action_logoTriviaFragment_to_loserFragment, bundle1);
 
                 }
             }
         });
 
     }
-
-    //Todo crear metodo para ir al fragmento ganador
-    private void addWinnerFragment(String name){
-        WinnerFragment winnerFragment = WinnerFragment.newInstance(name);
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
-                .replace(R.id.content_fragment, winnerFragment,
-                        LogoTriviaFragment.class.getSimpleName())
-                .addToBackStack(null);
-        fragmentTransaction.commit();
-    }
-
-
-    //Todo crear el metodo para ir al fragmento perdedor.
-    private void addLoserFragment(String name){
-        LoserFragment loserFragment = LoserFragment.newInstance(name);
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
-                .replace(R.id.content_fragment, loserFragment,
-                        LogoTriviaFragment.class.getSimpleName())
-                .addToBackStack(null);
-        fragmentTransaction.commit();
-    }
-
-    //TODO no olvidar pasar como argumento el nombre del jugador.
-
 
 }

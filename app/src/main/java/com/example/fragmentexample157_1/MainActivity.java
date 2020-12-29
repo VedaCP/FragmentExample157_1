@@ -18,15 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        addTitleFragment();
+
     }
 
-    private void addTitleFragment(){
-        TitleFragment titleFragment = TitleFragment.newInstance();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
-                .add(binding.contentFragment.getId(),titleFragment,
-                        TitleFragment.class.getSimpleName());
-        fragmentTransaction.commit();
-    }
 }
