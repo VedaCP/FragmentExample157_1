@@ -59,9 +59,8 @@ public class LogoTriviaFragment extends Fragment {
         String greeting = getString(R.string.greeting, name);
         binding.tvName.setText(greeting);
         Bundle bundle = new Bundle();
-        Bundle bundle1 = new Bundle();
         bundle.putString("param1", name);
-        bundle1.putString("param1", name);
+
 
         binding.radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -100,7 +99,7 @@ public class LogoTriviaFragment extends Fragment {
                             action_logoTriviaFragment_to_winnerFragment, bundle);
                 } else {
                     Navigation.findNavController(v).navigate(R.id.
-                            action_logoTriviaFragment_to_loserFragment, bundle1);
+                            action_logoTriviaFragment_to_loserFragment, bundle);
 
                 }
             }

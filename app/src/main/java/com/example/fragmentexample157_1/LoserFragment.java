@@ -39,11 +39,13 @@ public class LoserFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         String greeting = getString(R.string.mensajeloser, name);
         binding.tvMessageLoser.setText(greeting);
+        Bundle bandle = new Bundle();
+        bandle.putString("param1", name);
         binding.btLoser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Navigation.findNavController(v).navigate(R.id.
-                        action_loserFragment_to_logoTriviaFragment);
+                        action_loserFragment_to_logoTriviaFragment, bandle);
             }
         });
     }
